@@ -99,7 +99,7 @@ void sd_intr_init() {
     SDREG(MEGASOC_SD_EISER) = (
         1 << 0 | 1 << 1 | // CMD timeout/CRC
         1 << 4 | 1 << 5 | // DAT timeout/CRC
-        1 << 9
+        1 << 9 // ADMA err
     );
 }
 

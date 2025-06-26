@@ -564,7 +564,7 @@ int sys_read_dev(u_int va, u_int pa, u_int len) {
 
 int sys_read_block(u_int secno, void *dst, u_int nsecs) {
 	// Initialize description table
-	__attribute__((aligned(128))) static adma2_desc_entry adma2_dtable[512];
+	adma2_desc_entry adma2_dtable[512];
 	int i;
 	for (i = 0; i < nsecs; i++) {
 		uint32_t vaddr = dst + (i * 512);
@@ -584,24 +584,22 @@ int sys_read_block(u_int secno, void *dst, u_int nsecs) {
 						   0x1 << 2 | // Auto CMD12
 						   1 << 4 |// Read
 						   1 << 5; // Multiple Blocks 
-						   1 << 4;
 
 	uint32_t dtable_paddr = PADDR(adma2_dtable);
 	SDREG(MEGASOC_SD_ADMASAR_BASE) = ((uint16_t)(dtable_paddr & 0xffff));
 	SDREG(MEGASOC_SD_ADMASAR_BASE + 0x2) = ((uint16_t)(dtable_paddr >> 16));
 
-	if (1) { // We already know that
-        // debugf("SDSC card detected. Setting block length to 512 bytes.\n");
-		SDREG(MEGASOC_SD_BLKSIZE) = 512;
-    }
+	SDREG(MEGASOC_SD_BLKSIZE) = 512;
 	
 	SDREG(MEGASOC_SD_BLKCNTR) = ((uint16_t) nsecs);
 
 	sd_send_cmd18(secno * 512);
+	/*
 	for (i = 0; i < nsecs; i++) {
 		uint32_t vaddr = dst + (i * 512);
-		// debugf("Test: %x\n",*((int *)vaddr));
+		debugf("Test: %x\n",*((int *)vaddr));
 	}
+	*/
 	return 0;
 
 		// void* kva = (void*) KADDR(va2pa(curenv->env_pgdir, (u_long)dst));
@@ -611,7 +609,7 @@ int sys_read_block(u_int secno, void *dst, u_int nsecs) {
 
 int sys_write_block(u_int secno, const void *src, u_int nsecs) {
 	// Initialize description table
-	__attribute__((aligned(128))) static adma2_desc_entry adma2_dtable[512];
+	adma2_desc_entry adma2_dtable[512];
 	int i;
 	for (i = 0; i < nsecs; i++) {
 		uint32_t vaddr = src + (i * 512);
@@ -631,16 +629,12 @@ int sys_write_block(u_int secno, const void *src, u_int nsecs) {
 						   0x1 << 2 | // Auto CMD12
 						   0 << 4 |// Write
 						   1 << 5; // Multiple Blocks 
-						   1 << 4;
 
 	uint32_t dtable_paddr = PADDR(adma2_dtable);
 	SDREG(MEGASOC_SD_ADMASAR_BASE) = ((uint16_t)(dtable_paddr & 0xffff));
 	SDREG(MEGASOC_SD_ADMASAR_BASE + 0x2) = ((uint16_t)(dtable_paddr >> 16));
 
-	if (1) { // We already know that
-        // debugf("SDSC card detected. Setting block length to 512 bytes.\n");
-		SDREG(MEGASOC_SD_BLKSIZE) = 512;
-    }
+	SDREG(MEGASOC_SD_BLKSIZE) = 512;
 	
 	SDREG(MEGASOC_SD_BLKCNTR) = ((uint16_t) nsecs);
 

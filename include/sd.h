@@ -12,5 +12,6 @@ typedef struct {
 #define SDREG_8(reg) (*((volatile uint8_t *)(KSEG1 + reg)))
 void sd_init();
 void sd_send_cmd(int index, uint16_t argh, uint16_t argl, int *res);
-
+void sd_send_cmd18(u_int sd_addr);
+void sd_send_cmd25(u_int sd_addr);
 #endif 

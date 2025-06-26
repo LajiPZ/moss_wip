@@ -44,6 +44,11 @@ bss_loop:
 	addi.w  t0, t0, 1
 	b       bss_loop
 bss_loop_end:
+	// Configure KSEG0/1
+	li.w a0, 0x80000001
+	csrwr a0, csr_dmw0
+	li.w a0, 0xa0000011
+	csrwr a0, csr_dmw1
 	/* jump to la32r_init */
 	/* Exercise 1.3: Your code here. (2/2) */
 	b       la32r_init
