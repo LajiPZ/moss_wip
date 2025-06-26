@@ -24,6 +24,8 @@
 	st.w    x, sp, TF_ERA
 	csrrd   x, csr_badv
 	st.w    x, sp, TF_BADV
+	csrrd   x, csr_ecfg
+	st.w    x, sp, TF_ECFG
 	st.w    $r0, sp, TF_REG0
 	st.w    $r1, sp, TF_REG1
 	st.w    $r2, sp, TF_REG2
@@ -65,6 +67,10 @@
 	csrwr   v0, csr_prmd
 	ld.w    v1, sp, TF_ERA
 	csrwr   v1, csr_era
+	ld.w    v1, sp, TF_ECFG
+	csrwr   v1, csr_ecfg
+	ld.w    v1, sp, TF_BADV
+	csrwr   v1, csr_badv
 	ld.w    $r31, sp, TF_REG31
 	ld.w    $r30, sp, TF_REG30
 	ld.w    $r29, sp, TF_REG29

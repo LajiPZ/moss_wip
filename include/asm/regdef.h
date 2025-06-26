@@ -39,7 +39,7 @@
 #define csr_crmd 0x0
 #define csr_prmd 0x1
 #define csr_euen 0x2
-#define csr_ectl 0x4
+#define csr_ecfg 0x4
 #define csr_estat 0x5
 #define csr_era 0x6
 #define csr_badv 0x7

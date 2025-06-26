@@ -277,6 +277,7 @@ int env_alloc(struct Env **new, u_int parent_id) {
 	/* Step 4: Initialize the sp and 'crmd' in 'e->env_tf'. */
 	// Interrupt (CRMD_IE) will be enabled.
 	e->env_tf.crmd = CRMD_IE | CRMD_PLV;
+	e->env_tf.ecfg = ESTAT_TI;
 	// Keep space for 'argc' and 'argv'.
 	e->env_tf.regs[3] = USTACKTOP - sizeof(int) - sizeof(char **);
 

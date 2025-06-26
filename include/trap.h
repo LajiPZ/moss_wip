@@ -14,6 +14,7 @@ struct Trapframe {
 	unsigned long badv;
 	unsigned long estat;
 	unsigned long era;
+	unsigned long ecfg;
 };
 
 void print_tf(struct Trapframe *tf);
@@ -61,13 +62,12 @@ void print_tf(struct Trapframe *tf);
 #define TF_REG31 ((TF_REG30) + 4)
 
 #define TF_CRMD ((TF_REG31) + 4)
-
 #define TF_BADV ((TF_CRMD) + 4)
 #define TF_ESTAT ((TF_BADV) + 4)
 #define TF_ERA ((TF_ESTAT) + 4)
+#define TF_ECFG  ((TF_ERA) + 4)
 /*
  * Size of stack frame, word/double word alignment
  */
-#define TF_SIZE ((TF_ERA) + 4)
+#define TF_SIZE ((TF_ECFG) + 4)
 #endif /* _TRAP_H_ */
-a

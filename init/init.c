@@ -32,15 +32,15 @@ void la32r_init() {
 
 	// lab4:
 	// ENV_CREATE(user_tltest);
-	// ENV_CREATE(user_fktest);
+	 ENV_CREATE(user_fktest);
 	// ENV_CREATE(user_pingpong);
 
 	// lab6:
-	ENV_CREATE(user_icode); // This must be the first env!
+//	ENV_CREATE(user_icode); // This must be the first env!
 
 	// lab5:
 	// ENV_CREATE(user_fstest);
-	ENV_CREATE(fs_serv); // This must be the second env!
+//	ENV_CREATE(fs_serv); // This must be the second env!
 	// ENV_CREATE(user_devtst);
 
 	// lab3:

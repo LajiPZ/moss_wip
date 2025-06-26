@@ -25,14 +25,7 @@ _start:
 	li.w    a0, 0x0c000000
 	csrwr   a0, csr_tlbidx
 
-	/* initialize timer */
-	li.w    t0, ESTAT_TI
-	csrwr   t0, csr_ectl
-/* End of Key Code "enter-kernel" */
-
-	/* hint: you can refer to the memory layout in include/mmu.h */
 	/* set up the kernel stack */
-	/* Exercise 1.3: Your code here. (1/2) */
 	li.w    sp, KSTACKTOP
 
 	/* clear bss segment for C env. */
@@ -49,7 +42,7 @@ bss_loop_end:
 	csrwr a0, csr_dmw0
 	li.w a0, 0xa0000011
 	csrwr a0, csr_dmw1
+
 	/* jump to la32r_init */
-	/* Exercise 1.3: Your code here. (2/2) */
 	b       la32r_init
 	nop
